@@ -47,6 +47,11 @@ https://jar-download.com/artifacts/com.ethlo.persistence.tools/eclipselink-maven
     <version>0.99.9</version>
 </dependency> 
 
+  <dependency>
+    <groupId>jstl</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
     
   </dependencies>
   <build>

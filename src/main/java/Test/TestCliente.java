@@ -1,5 +1,7 @@
 package Test;
 
+import java.util.List;
+
 import Dao.TblClienteImp;
 import model.TblCliente;
 
@@ -10,7 +12,7 @@ public class TestCliente {
 		TblCliente cliente=new TblCliente();
 		TblClienteImp crud=new TblClienteImp();
 		//insertamos datos
-		cliente.setNombre("alex");
+		/*cliente.setNombre("alex");
 		cliente.setApellido("rivera rivera");
 		cliente.setDni("104534589");
 		cliente.setEmail("alex@gmail.com");
@@ -18,7 +20,18 @@ public class TestCliente {
 		cliente.setSexo("M");
 		cliente.setNacionalidad("colombia");
 		//invocamos el metodo registrar...
-		crud.RegistrarCliente(cliente);
+		crud.RegistrarCliente(cliente);*/
+		//****************testeamos el listado
+		List<TblCliente> listado=crud.ListarCliente();
+		//aplicamos un bucle
+		for(TblCliente lis:listado){
+			
+			//imprimimos por pantalla
+			System.out.println("codigo "+lis.getIdcliente()+
+					" nombre "+lis.getNombre()+" apellido "+lis.getApellido()+" dni "+lis.getDni());
+			
+		}    //fin del bucle for...
+		
 
 	}//fin del metodo principal...
 
