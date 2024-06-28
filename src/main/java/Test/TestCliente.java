@@ -21,6 +21,33 @@ public class TestCliente {
 		cliente.setNacionalidad("colombia");
 		//invocamos el metodo registrar...
 		crud.RegistrarCliente(cliente);*/
+		
+		/*
+		//******************testeamos el actualizar..
+		cliente.setIdcliente(1);
+		cliente.setNombre("roxana liz");
+		cliente.setApellido("pinedo pinedo");
+		cliente.setDni("4567896");
+		cliente.setEmail("roxana@gmail.com");
+		cliente.setTelf("789456");
+		cliente.setSexo("F");
+		cliente.setNacionalidad("brasilera");
+		//invocamos al metodo actualizar
+		crud.ActualizarCliente(cliente);
+		*/
+		//**********testeamos el metodo buscar..
+		cliente.setIdcliente(5);
+		TblCliente buscliente=crud.BuscarCliente(cliente);
+		System.out.println("******cliente buscado*******");
+		//imprimimos por pantalla el cliente buscado..
+		System.out.println("nombre "+buscliente.getNombre()+
+				" apellido "+buscliente.getApellido()+
+				" dni "+buscliente.getDni()+" email "+buscliente.getEmail()+
+				" telefono "+buscliente.getTelf()+
+				" sexo "+buscliente.getSexo()+" nacionalidad "+buscliente.getNacionalidad());
+		
+		
+		
 		//****************testeamos el listado
 		List<TblCliente> listado=crud.ListarCliente();
 		//aplicamos un bucle

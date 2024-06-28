@@ -49,7 +49,54 @@ public class ControladorCliente extends HttpServlet {
 		request.setAttribute("listadoclientes",listadocliente);	
 		//response.getWriter().append("Controlador Cliente ").append(request.getContextPath());
 	   //redireccionamos
-		request.getRequestDispatcher("/ListadoClientes.jsp").forward(request, response);
+	//	request.getRequestDispatcher("/ListadoClientes.jsp").forward(request, response);
+	
+	 //recuperamos la accion y codigo
+		String accion=request.getParameter("accion");
+		//aplicamos una condicion
+		if(accion!=null){
+			//aplicamos un switch
+			switch(accion){
+			case "Modificar":
+				int codigo=Integer.parseInt(request.getParameter("cod"));
+				//asignamos el codigo
+				cliente.setIdcliente(codigo);
+				//buscar ese codigo a actualizar
+				TblCliente codbus=crud.BuscarCliente(cliente);
+				//enviamos los valores buscados por codigo de la base de datos
+				//al formulario actualizar
+				request.setAttribute("codigo",codbus.getIdcliente());
+				request.setAttribute("nombre",codbus.getNombre());
+				request.setAttribute("apellido",codbus.getApellido());
+				request.setAttribute("dni",codbus.getDni());
+				request.setAttribute("email",codbus.getEmail());
+				request.setAttribute("telef",codbus.getTelf());
+				request.setAttribute("sexo",codbus.getSexo());
+				request.setAttribute("nacionalidad",codbus.getNacionalidad());
+				//redireccionamos
+				request.getRequestDispatcher("/FormActualizarCliente.jsp").forward(request, response);;
+				//salimos
+				break;
+			case "Eliminar":
+				//recuperamos el codigo a eliminar
+				int codelim=Integer.parseInt(request.getParameter("cod"));
+				//asignar el codigo
+				cliente.setIdcliente(codelim);
+				//invocamos al metodo eliminar
+				crud.EliminarCliente(cliente);
+				//actualizar el listado
+				//asignamo el listado de clientes recuperados de la BD.
+				request.setAttribute("listadoclientes",listadocliente);	
+				//response.getWriter().append("Controlador Cliente ").append(request.getContextPath());
+			   //redireccionamos
+				request.getRequestDispatcher("/ListadoClientes.jsp").forward(request, response);
+				//salimos
+				break;
+			}  //fin del switch...
+			
+		} 
+	
+	
 	
 	}  //fin del metodo doget..
 
@@ -60,6 +107,7 @@ public class ControladorCliente extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		//recuperamos los datos del formulario
+		String codigo=request.getParameter("codigo");
 		String nombre=request.getParameter("nombre");
 		String apellido=request.getParameter("apellido");
 		String dni=request.getParameter("dni");
@@ -78,8 +126,17 @@ public class ControladorCliente extends HttpServlet {
 		cliente.setTelf(telef);
 		cliente.setSexo(sexo);
 		cliente.setNacionalidad(nacion);
+		//aplicamos una condicion
+		if(codigo!=null){
+			int cod=Integer.parseInt(codigo);
+			cliente.setIdcliente(cod);
+			//invocamos el metodo actualizar
+			crud.ActualizarCliente(cliente);
+			
+		}else{
 		//invocamos el metodo a registrar cliente en la bd
 		crud.RegistrarCliente(cliente);
+		}
 		//actualizar el listado
 		List<TblCliente> listadocliente=crud.ListarCliente();
 		//asignamo el listado de clientes recuperados de la BD.

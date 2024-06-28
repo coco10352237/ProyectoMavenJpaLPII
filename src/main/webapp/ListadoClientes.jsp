@@ -25,6 +25,7 @@
 <td>Telef</td>
 <td>Sexo</td>
 <td>Nacionalidad</td>
+<td colspan="2" align="center">Acciones</td>
 </tr>
 <%
 List<TblCliente> listadocliente=(List<TblCliente>)request.getAttribute("listadoclientes");
@@ -57,9 +58,13 @@ for(TblCliente lis:listadocliente){
 <td>
 <%=lis.getNacionalidad() %>
 </td>
+<td><a href="ControladorCliente?accion=Modificar&cod=<%=lis.getIdcliente()%>">Actualizar</a></td>
+<td><a href="ControladorCliente?accion=Eliminar&cod=<%=lis.getIdcliente()%>">Eliminar</a></td>
 </tr>
 <%
       }//cerramos la condicion...
+%>
+<%
 }   //cerramos el bucle
 %>
 </table>

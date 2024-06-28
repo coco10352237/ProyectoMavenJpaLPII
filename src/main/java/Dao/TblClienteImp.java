@@ -32,20 +32,63 @@ public class TblClienteImp implements ICliente{
 
 	@Override
 	public void ActualizarCliente(TblCliente cliente) {
-		// TODO Auto-generated method stub
+		//establecemos la conexion con la unidad de persistencia...
+		EntityManagerFactory fab=Persistence.createEntityManagerFactory("ProyectoMavenJpaLPII");
+		//permite gestionar entidades..
+				EntityManager eman=fab.createEntityManager();
+				//iniciar transaccion...
+				eman.getTransaction().begin();
+				//actualizamos
+				eman.merge(cliente);
+				//emitimos un mensaje por consola
+				System.out.println("Data actualizado correctamente");
+				//confirmamos
+				eman.getTransaction().commit();
+				//cerramos
+				eman.close();
+				
 		
 	}
 
 	@Override
 	public void EliminarCliente(TblCliente cliente) {
-		// TODO Auto-generated method stub
+		//establecer conexion con la unidad de persistencia
+		//establecemo conexion con la unidad de persistencia...
+		EntityManagerFactory fabri=Persistence.createEntityManagerFactory("ProyectoMavenJpaLPII");
+		//permite gestionar entidades..
+	     EntityManager eman=fabri.createEntityManager();
+		//iniciar transaccion...
+	     eman.getTransaction().begin();
+	     //recuperamos  el codigo a eliminar
+	     TblCliente elim=eman.merge(cliente);
+	     //procedemos a eliminar el cliente
+	     eman.remove(elim);
+	     //emitimos mensaje por consola
+	     System.out.println("registro eliminado");
+	     //confirmamos
+	     eman.getTransaction().commit();
+	     //cerramos
+	     eman.close();
+	
 		
 	}
 
 	@Override
 	public TblCliente BuscarCliente(TblCliente cliente) {
-		// TODO Auto-generated method stub
-		return null;
+		//establecemos la conexion con la unidad de persistencia...
+				EntityManagerFactory fab=Persistence.createEntityManagerFactory("ProyectoMavenJpaLPII");
+				//permite gestionar entidades..
+						EntityManager eman=fab.createEntityManager();
+						//iniciar transaccion...
+						eman.getTransaction().begin();
+						//recuperamos el codigo a buscar...
+						TblCliente buscliente=eman.find(TblCliente.class,cliente.getIdcliente());
+						//confirmamos la transaccion
+						eman.getTransaction().commit();
+						//cerramos
+						eman.close();
+						//retornamos el cliente buscado
+		               return buscliente;
 	}
 
 	@Override
